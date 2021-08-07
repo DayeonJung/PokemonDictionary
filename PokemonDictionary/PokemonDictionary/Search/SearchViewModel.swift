@@ -9,7 +9,8 @@ import Foundation
 
 class SearchViewModel {
     
-    private var pokemonNames: [PokemonName]?
+    private var names: [PokemonName]?
+    private var locations: [PokemonLocation]?
     private var searchedPokemons: [SearchedPokemon] = [] {
         didSet {
             self.updateList?()
@@ -17,9 +18,11 @@ class SearchViewModel {
     }
         
     var updateList: (() -> Void)?
+    var moveToDestinationVC: ((PokemonDetailsViewModel) -> Void)?
     
     init() {
         self.getPokemonNames()
+        self.getLocationsOfPokemons()
     }
     
     private func getPokemonNames() {
@@ -27,17 +30,29 @@ class SearchViewModel {
         API.shared.get(resource: Resource<PokemonNames>(url: .names)) { result in
             switch result {
             case .success(let datas):
-                self.pokemonNames = datas.pokemons
+                self.names = datas.pokemons
                 
             case .failure(let error):
-                self.pokemonNames = nil
+                self.names = nil
                 print("Error", error.localizedDescription)
 
             }
         }
     }
     
-    
+    private func getLocationsOfPokemons() {
+        
+        API.shared.get(resource: Resource<PokemonLocations>(url: .locations)) { result in
+            switch result {
+            case .success(let datas):
+                self.locations = datas.pokemons
+                
+            case .failure(let error):
+                self.locations = nil
+                print("Error", error.localizedDescription)
+            }
+        }
+    }
     
 
 }
@@ -55,12 +70,33 @@ extension SearchViewModel {
         return self.searchedPokemon(at: index).displayText()
     }
     
+    func didSelectItem(at index: Int) {
+        let pokemon = self.searchedPokemon(at: index)
+        let id = pokemon.name.id
+        let names = pokemon.name.names
+        let latLngInfo = self.findLocationInfos(with: id)
+        let pokemonDetailVM = PokemonDetailsViewModel(id: id,
+                                                      names: names,
+                                                      locations: latLngInfo)
+        self.moveToDestinationVC?(pokemonDetailVM)
+    }
+    
+    private func findLocationInfos(with id: Int) -> [(Double, Double)] {
+        guard let locationInfos = locations else { return [] }
+        return locationInfos.compactMap({ location -> (Double, Double)? in
+            guard location.id == id else {
+                return nil
+            }
+            return (location.lat, location.lng)
+        })
+    }
+    
 }
 
 extension SearchViewModel: InputDelegate {
     
     func updateInput(with model: Input) {
-        guard let pokemonNames = self.pokemonNames else { return }
+        guard let pokemonNames = self.names else { return }
         
         let languageIndex = model.languageType.rawValue
         let lowercasedText = model.text.lowercased()
