@@ -30,9 +30,17 @@ class PokemonDetailsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.stackView.alpha = 0
+        
+        self.locationsButton.addTarget(self, action: #selector(self.moveToMapVC), for: .touchUpInside)
     }
 
 
+    @objc func moveToMapVC() {
+        let destVC = PokemonMapViewController(nibName: "PokemonMapViewController", bundle: nil)
+        destVC.viewModel = MapViewModel(locations: self.viewModel.locationInfos())
+        self.present(destVC, animated: true, completion: nil)
+    }
+    
     func updateStackViewUI() {
         guard let stackView = self.stackView else { return }
         

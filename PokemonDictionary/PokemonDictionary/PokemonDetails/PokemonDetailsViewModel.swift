@@ -97,4 +97,8 @@ extension PokemonDetailsViewModel {
     func hasHabitat() -> Bool {
         return !self.locations.isEmpty
     }
+    
+    func locationInfos() -> [(Double, Double)] {
+        return self.locations
+    }
 }
