@@ -34,6 +34,8 @@
 		B4A3ACFA26BF68AA00A5C7E0 /* PokemonMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4A3ACF826BF68AA00A5C7E0 /* PokemonMapViewController.swift */; };
 		B4A3ACFB26BF68AA00A5C7E0 /* PokemonMapViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B4A3ACF926BF68AA00A5C7E0 /* PokemonMapViewController.xib */; };
 		B4A3ACFD26BF6A4A00A5C7E0 /* MapViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4A3ACFC26BF6A4A00A5C7E0 /* MapViewModel.swift */; };
+		B4A3ACFF26BFC1EB00A5C7E0 /* PokemonAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4A3ACFE26BFC1EB00A5C7E0 /* PokemonAnnotationView.swift */; };
+		B4A3AD0126C0008600A5C7E0 /* Coorinate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4A3AD0026C0008600A5C7E0 /* Coorinate.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -66,6 +68,8 @@
 		B4A3ACF826BF68AA00A5C7E0 /* PokemonMapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonMapViewController.swift; sourceTree = "<group>"; };
 		B4A3ACF926BF68AA00A5C7E0 /* PokemonMapViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PokemonMapViewController.xib; sourceTree = "<group>"; };
 		B4A3ACFC26BF6A4A00A5C7E0 /* MapViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewModel.swift; sourceTree = "<group>"; };
+		B4A3ACFE26BFC1EB00A5C7E0 /* PokemonAnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonAnnotationView.swift; sourceTree = "<group>"; };
+		B4A3AD0026C0008600A5C7E0 /* Coorinate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coorinate.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -179,7 +183,9 @@
 		B4A3ACF726BF687A00A5C7E0 /* Map */ = {
 			isa = PBXGroup;
 			children = (
+				B4A3AD0026C0008600A5C7E0 /* Coorinate.swift */,
 				B4A3ACFC26BF6A4A00A5C7E0 /* MapViewModel.swift */,
+				B4A3ACFE26BFC1EB00A5C7E0 /* PokemonAnnotationView.swift */,
 				B4A3ACF826BF68AA00A5C7E0 /* PokemonMapViewController.swift */,
 				B4A3ACF926BF68AA00A5C7E0 /* PokemonMapViewController.xib */,
 			);
@@ -266,10 +272,12 @@
 				B4955C2326BBE7C700AA1835 /* SearchViewController.swift in Sources */,
 				B4877C6826BCCCAA00647823 /* ListExtension.swift in Sources */,
 				B4877C7426BCEC6500647823 /* InputView.swift in Sources */,
+				B4A3AD0126C0008600A5C7E0 /* Coorinate.swift in Sources */,
 				B4955C3426BBEB0D00AA1835 /* Resource.swift in Sources */,
 				B4877C6526BCCC1A00647823 /* PokemonNameCell.swift in Sources */,
 				B492B81326BEAF120066CCBE /* PokemonDetailsViewController.swift in Sources */,
 				B4955C1F26BBE7C700AA1835 /* AppDelegate.swift in Sources */,
+				B4A3ACFF26BFC1EB00A5C7E0 /* PokemonAnnotationView.swift in Sources */,
 				B4877C7226BCDFB900647823 /* SearchedPokemon.swift in Sources */,
 				B4A3ACFD26BF6A4A00A5C7E0 /* MapViewModel.swift in Sources */,
 				B4A3ACFA26BF68AA00A5C7E0 /* PokemonMapViewController.swift in Sources */,

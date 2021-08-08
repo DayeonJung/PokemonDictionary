@@ -16,7 +16,11 @@ class PokemonMapViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.setMapView(coordinates: self.viewModel.coordinate)
+        self.mapView.delegate = self
+        self.mapView.register(PokemonAnnotationView.self,
+                              forAnnotationViewWithReuseIdentifier: MKMapViewDefaultAnnotationViewReuseIdentifier)
+
+        self.setMapView()
 
     }
 
@@ -25,28 +29,16 @@ class PokemonMapViewController: UIViewController {
     }
     
     
-    private func setMapView(coordinates: [CLLocationCoordinate2D]) {
-        
-        guard let maxDistance = self.viewModel.maxDistance else { return }
-        let region = MKCoordinateRegion(center: self.viewModel.centerCoordi,
-                                        latitudinalMeters: maxDistance,
-                                        longitudinalMeters: maxDistance)
-        self.mapView.setRegion(region, animated: true)
-        
-        _ = coordinates.map({
-            self.addAnnotation(coordinate: $0)
-        })
-        
+    private func setMapView() {
+        self.mapView.setRegion(self.viewModel.region, animated: true)
+        self.mapView.addAnnotations(self.viewModel.coordinates)
     }
     
-    
-    private func addAnnotation(coordinate: CLLocationCoordinate2D){
-        let annotation = MKPointAnnotation()
-        annotation.coordinate = coordinate
-        self.mapView.addAnnotation(annotation)
-        
+}
+
+extension PokemonMapViewController: MKMapViewDelegate {
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+        return PokemonAnnotationView(annotation: annotation,
+                                     reuseIdentifier: PokemonAnnotationView.reuseID)
     }
-    
-    
-    
 }

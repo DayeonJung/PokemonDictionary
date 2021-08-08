@@ -10,14 +10,23 @@ import MapKit
 
 struct MapViewModel {
     
-    let coordinate: [CLLocationCoordinate2D]
-    let centerCoordi: CLLocationCoordinate2D
-    let maxDistance: CLLocationDistance?
+    let coordinates: [Coorinate]
+    private let centerCoordi: CLLocationCoordinate2D
+    private let maxDistance: CLLocationDistance?
+    
+    var region: MKCoordinateRegion {
+        guard let maxDistance = self.maxDistance else {
+            return MKCoordinateRegion()
+        }
+        return MKCoordinateRegion(center: self.centerCoordi,
+                                  latitudinalMeters: maxDistance,
+                                  longitudinalMeters: maxDistance)
+    }
     
     init(locations: [(Double, Double)]) {
-        self.coordinate = locations.map({ CLLocationCoordinate2D(latitude: $0.0,
-                                                                 longitude: $0.1)} )
         
+        self.coordinates = locations.map({Coorinate(latitude: $0.0, longitude: $0.1)})
+
         let centerLat = locations.map({$0.0}).reduce(0, +)/Double(locations.count)
         let centerLng = locations.map({$0.1}).reduce(0, +)/Double(locations.count)
         self.centerCoordi = CLLocationCoordinate2D(latitude: centerLat,
@@ -26,7 +35,7 @@ struct MapViewModel {
         let centerLocation = CLLocation(latitude: centerLat,
                                         longitude: centerLng)
         let clLocations = locations.map({ CLLocation(latitude: $0.0,
-                                                     longitude: $0.1)})
+                                                     longitude: $0.1) })
         let maxDistance = clLocations.map({ $0.distance(from: centerLocation) }).max()
         
         let width = UIScreen.main.bounds.width
