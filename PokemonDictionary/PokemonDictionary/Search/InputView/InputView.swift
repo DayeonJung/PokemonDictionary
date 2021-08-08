@@ -22,7 +22,7 @@ class InputView: UIView {
         self.commoninit()
     }
     
-    required override init(frame: CGRect) {
+    override init(frame: CGRect) {
         super.init(frame: frame)
         self.commoninit()
     }

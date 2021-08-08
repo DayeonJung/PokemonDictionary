@@ -9,6 +9,7 @@ import UIKit
 
 class SearchViewController: UIViewController {
 
+    @IBOutlet weak var inputTopView: InputView!
     @IBOutlet weak var searchList: UICollectionView!
     
     var viewModel: SearchViewModel! {
@@ -17,19 +18,21 @@ class SearchViewController: UIViewController {
                 print("update")
                 self.searchList.reloadData()
             }
+            
+            self.viewModel.moveToDestinationVC = { viewModel in
+                let destVC = PokemonDetailsViewController(nibName: "PokemonDetailsViewController", bundle: nil)
+                destVC.viewModel = viewModel
+                self.navigationController?.pushViewController(destVC, animated: true)
+            }
         }
     }
-    
-    var inputTopView: InputView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.navigationController?.navigationBar.isHidden = true
         self.viewModel = SearchViewModel()
 
-        self.inputTopView = InputView(frame: CGRect(origin: .zero,
-                                                size: CGSize(width: UIScreen.main.bounds.width, height: 70)))
-        self.view.addSubview(self.inputTopView)
         self.inputTopView.delegate = self.viewModel
         
         self.searchList.setCell(cellName: PokemonNameCell.self)
@@ -59,6 +62,8 @@ extension SearchViewController: UICollectionViewDelegateFlowLayout {
 }
 
 extension SearchViewController: UICollectionViewDelegate {
-    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        self.viewModel.didSelectItem(at: indexPath.item)
+    }
 }
 
