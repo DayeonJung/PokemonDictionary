@@ -9,27 +9,47 @@ import UIKit
 
 class PokemonDetailsViewController: UIViewController {
 
+    @IBOutlet weak var stackView: UIStackView!
+    
+    @IBOutlet weak var imageView: LoadingImageView!
+    @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var heightLabel: UILabel!
+    @IBOutlet weak var weightLabel: UILabel!
+    @IBOutlet weak var locationsButton: UIButton!
+    
     var viewModel: PokemonDetailsViewModel! {
         didSet {
-            
+            self.viewModel.updateStackView = {
+                DispatchQueue.main.async {
+                    self.updateStackViewUI()
+                }
+            }
         }
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        print(viewModel)
+        self.stackView.alpha = 0
     }
 
 
-    /*
-    // MARK: - Navigation
+    func updateStackViewUI() {
+        guard let stackView = self.stackView else { return }
+        
+        self.nameLabel.text = "이름 : " + self.viewModel.namesOfPokemon()
+        self.heightLabel.text = "키 : " + self.viewModel.heightOfPokemon()
+        self.weightLabel.text = "몸무게 : " + self.viewModel.weightOfPokemon()
+        self.locationsButton.isHidden = !self.viewModel.hasHabitat()
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+        if let imageStr = self.viewModel.imageString() {
+            self.imageView.loadImage(with: imageStr)
+        } else {
+            self.imageView.isHidden = true
+        }
+                
+        UIView.animate(withDuration: 0.5) {
+            stackView.alpha = 1
+        }
     }
-    */
-
+    
 }

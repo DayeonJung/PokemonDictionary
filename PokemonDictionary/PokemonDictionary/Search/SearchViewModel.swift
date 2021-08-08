@@ -75,9 +75,9 @@ extension SearchViewModel {
         let id = pokemon.name.id
         let names = pokemon.name.names
         let latLngInfo = self.findLocationInfos(with: id)
-        let pokemonDetailVM = PokemonDetailsViewModel(id: id,
-                                                      names: names,
-                                                      locations: latLngInfo)
+        let pokemonDetailVM = PokemonDetailsViewModel(id,
+                                                      names,
+                                                      latLngInfo)
         self.moveToDestinationVC?(pokemonDetailVM)
     }
     
