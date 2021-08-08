@@ -15,7 +15,6 @@ class SearchViewController: UIViewController {
     var viewModel: SearchViewModel! {
         didSet {
             self.viewModel.updateList = {
-                print("update")
                 self.searchList.reloadData()
             }
             
@@ -31,12 +30,10 @@ class SearchViewController: UIViewController {
         super.viewDidLoad()
         
         self.navigationController?.navigationBar.isHidden = true
+        
         self.viewModel = SearchViewModel()
-
         self.inputTopView.delegate = self.viewModel
-        
         self.searchList.setCell(cellName: PokemonNameCell.self)
-        
     }
 
 
@@ -54,11 +51,6 @@ extension SearchViewController: UICollectionViewDataSource {
         return cell
     }
     
-    
-}
-
-extension SearchViewController: UICollectionViewDelegateFlowLayout {
-
 }
 
 extension SearchViewController: UICollectionViewDelegate {
