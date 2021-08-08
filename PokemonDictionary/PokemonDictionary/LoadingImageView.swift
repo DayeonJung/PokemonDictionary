@@ -10,7 +10,7 @@ import UIKit
 
 class LoadingImageView: UIImageView {
     
-    func loadImage(with urlString: String) {
+    func loadImage(with urlString: String, completion: @escaping (() -> Void)) {
         let width = self.frame.size.width
         let targetSize = CGSize(width: width,
                                 height: width)
@@ -29,6 +29,7 @@ class LoadingImageView: UIImageView {
                     let resized = self.resizeImage(image: loadedImage,
                                                    targetSize: targetSize)
                     self.image = resized
+                    completion()
                 }
                 
             case .failure(let error):

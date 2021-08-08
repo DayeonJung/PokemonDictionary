@@ -21,7 +21,8 @@ class SearchViewController: UIViewController {
             self.viewModel.moveToDestinationVC = { viewModel in
                 let destVC = PokemonDetailsViewController(nibName: "PokemonDetailsViewController", bundle: nil)
                 destVC.viewModel = viewModel
-                self.navigationController?.pushViewController(destVC, animated: true)
+                destVC.modalPresentationStyle = .overCurrentContext
+                self.present(destVC, animated: false, completion: nil)
             }
         }
     }
