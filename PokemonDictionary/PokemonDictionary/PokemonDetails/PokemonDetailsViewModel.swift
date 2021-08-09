@@ -53,21 +53,18 @@ class PokemonDetailsViewModel {
     private func pickProperImageStr(response: PokemonDetails?) -> String? {
         guard let response = response else { return nil }
         let sprites = response.sprites
-        let properties = [sprites.frontDefault,
-                          sprites.frontFemale,
-                          sprites.frontShiny,
-                          sprites.frontShinyFemale,
-                          sprites.backDefault,
-                          sprites.backFemale,
-                          sprites.backShiny,
-                          sprites.backShinyFemale]
-        for property in properties {
-            if let imageStr = property {
-                return imageStr
-            }
+        
+        if let frontDefault = sprites.frontDefault {
+            return frontDefault
         }
         
-        return nil
+        return [sprites.frontFemale,
+                sprites.frontShiny,
+                sprites.frontShinyFemale,
+                sprites.backDefault,
+                sprites.backFemale,
+                sprites.backShiny,
+                sprites.backShinyFemale].shuffled().compactMap({$0}).first
     }
 }
 

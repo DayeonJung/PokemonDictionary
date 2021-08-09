@@ -12,7 +12,6 @@
             <connections>
                 <outlet property="containerView" destination="dMV-bm-I6E" id="FYY-fC-kao"/>
                 <outlet property="containerViewBottomConstraint" destination="cKF-Q8-oHT" id="rQp-PJ-fh9"/>
-                <outlet property="containerViewHeightConstraint" destination="8FM-xZ-6QJ" id="gSO-oI-TnR"/>
                 <outlet property="dimmedView" destination="teW-tz-jpw" id="9Cf-Mu-2VV"/>
                 <outlet property="heightLabel" destination="pwn-j8-nJc" id="StP-cv-PBk"/>
                 <outlet property="imageView" destination="0T8-Uq-hw2" id="X3w-hE-m1G"/>
@@ -94,7 +93,6 @@
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstItem="UmH-6k-ovo" firstAttribute="leading" secondItem="dMV-bm-I6E" secondAttribute="leading" id="0B2-l2-91d"/>
-                        <constraint firstAttribute="height" relation="lessThanOrEqual" constant="580" id="8FM-xZ-6QJ"/>
                         <constraint firstItem="UmH-6k-ovo" firstAttribute="top" secondItem="dMV-bm-I6E" secondAttribute="top" id="Elk-II-cSZ"/>
                         <constraint firstAttribute="bottom" secondItem="UmH-6k-ovo" secondAttribute="bottom" id="aLH-Pp-kIY"/>
                         <constraint firstAttribute="trailing" secondItem="UmH-6k-ovo" secondAttribute="trailing" id="fXW-d1-Mvk"/>

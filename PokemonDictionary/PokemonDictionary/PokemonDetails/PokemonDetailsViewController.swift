@@ -20,19 +20,22 @@ class PokemonDetailsViewController: UIViewController {
     @IBOutlet weak var weightLabel: UILabel!
     @IBOutlet weak var locationsButton: UIButton!
     
-    @IBOutlet weak var containerViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var containerViewBottomConstraint: NSLayoutConstraint!
     
     let maxDimmedAlpha: CGFloat = 0.6
     var defaultHeight: CGFloat = 580
-    let dismissibleHeight: CGFloat = 200
+    let dismissibleHeight: CGFloat = 300
 
     var viewModel: PokemonDetailsViewModel! {
         didSet {
             self.viewModel.updateStackView = {
                 DispatchQueue.main.async {
-                    self.updateStackViewUI()
+                    self.updateStackViewUI {
+                        self.animate(onstraint: self.containerViewBottomConstraint,
+                                     contant: 0)
+                    }
                 }
+                
             }
         }
     }
@@ -54,40 +57,27 @@ class PokemonDetailsViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-
         self.animateShowDimmedView()
-        self.animatePresentContainer()
     }
     
-    func animateShowDimmedView() {
+    private func animateShowDimmedView() {
         dimmedView.alpha = 0
         UIView.animate(withDuration: 0.4) {
             self.dimmedView.alpha = self.maxDimmedAlpha
         }
     }
     
-    func animatePresentContainer() {
-        UIView.animate(withDuration: 0.3) {
-            self.containerViewBottomConstraint?.constant = 0
-            self.view.layoutIfNeeded()
-        }
-        defaultHeight = self.stackView.bounds.height
-    }
-    
-    
-    func animateContainerHeight(_ height: CGFloat) {
+    private func animate(onstraint: NSLayoutConstraint!,
+                         contant: CGFloat) {
         UIView.animate(withDuration: 0.4) {
-            self.containerViewHeightConstraint?.constant = height
+            onstraint.constant = contant
             self.view.layoutIfNeeded()
         }
-        defaultHeight = height
     }
     
     private func animateDismissView() {
-        UIView.animate(withDuration: 0.3) {
-            self.containerViewBottomConstraint?.constant = self.defaultHeight
-            self.view.layoutIfNeeded()
-        }
+        self.animate(onstraint: self.containerViewBottomConstraint,
+                     contant: self.defaultHeight)
         
         dimmedView.alpha = maxDimmedAlpha
         UIView.animate(withDuration: 0.4) {
@@ -98,7 +88,7 @@ class PokemonDetailsViewController: UIViewController {
     }
 
     
-    func updateStackViewUI() {
+    private func updateStackViewUI(completion: @escaping (() -> Void)) {
         guard let _ = self.stackView else { return }
         
         self.nameLabel.text = "이름 : " + self.viewModel.namesOfPokemon()
@@ -108,13 +98,11 @@ class PokemonDetailsViewController: UIViewController {
 
         if let imageStr = self.viewModel.imageString() {
             self.imageView.loadImage(with: imageStr) {
-                let updatedStackViewHeight = self.stackView.bounds.height
-                if self.defaultHeight != updatedStackViewHeight {
-                    self.animateContainerHeight(updatedStackViewHeight)
-                }
+                completion()
             }
         } else {
             self.imageView.isHidden = true
+            completion()
         }
 
     }
@@ -147,7 +135,6 @@ extension PokemonDetailsViewController {
     private func setupPanGesture() {
         let panGesture = UIPanGestureRecognizer(target: self,
                                                 action: #selector(self.handlePanGesture(gesture:)))
-        // change to false to immediately listen on gesture movement
         panGesture.delaysTouchesBegan = false
         panGesture.delaysTouchesEnded = false
         self.view.addGestureRecognizer(panGesture)
@@ -155,20 +142,21 @@ extension PokemonDetailsViewController {
 
     @objc func handlePanGesture(gesture: UIPanGestureRecognizer) {
         let translation = gesture.translation(in: view)
-        let newHeight = defaultHeight - translation.y
+        let newHeight = self.defaultHeight - translation.y
         
         switch gesture.state {
         case .changed:
-            if newHeight < defaultHeight {
-                containerViewHeightConstraint?.constant = newHeight
+            if newHeight < self.defaultHeight {
+                self.containerViewBottomConstraint?.constant = translation.y
                 view.layoutIfNeeded()
             }
             
         case .ended:
-            if newHeight < dismissibleHeight {
+            if newHeight < self.dismissibleHeight {
                 self.animateDismissView()
-            } else if newHeight < defaultHeight {
-                animateContainerHeight(defaultHeight)
+            } else if newHeight < self.defaultHeight {
+                self.animate(onstraint: self.containerViewBottomConstraint,
+                             contant: 0)
             }
             
         default:
