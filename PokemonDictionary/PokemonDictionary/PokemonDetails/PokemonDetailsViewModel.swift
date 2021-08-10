@@ -39,9 +39,8 @@ class PokemonDetailsViewModel {
                 self.weight = datas.weight
                 self.imageStr = self.pickProperImageStr(response: datas)
 
-            case .failure(let error):
+            case .failure(_):
                 self.imageStr = nil
-                print("Error", error.localizedDescription)
 
             }
             

@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B43EFE0326C28720008C85FE /* InsetLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B43EFE0226C28720008C85FE /* InsetLabel.swift */; };
+		B43EFE0526C28923008C85FE /* ToastMessageShowable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B43EFE0426C28923008C85FE /* ToastMessageShowable.swift */; };
+		B43EFE0726C2A074008C85FE /* APIProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = B43EFE0626C2A074008C85FE /* APIProtocol.swift */; };
 		B4877C6526BCCC1A00647823 /* PokemonNameCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4877C6326BCCC1A00647823 /* PokemonNameCell.swift */; };
 		B4877C6626BCCC1A00647823 /* PokemonNameCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B4877C6426BCCC1A00647823 /* PokemonNameCell.xib */; };
 		B4877C6826BCCCAA00647823 /* ListExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4877C6726BCCCAA00647823 /* ListExtension.swift */; };
@@ -39,6 +42,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		B43EFE0226C28720008C85FE /* InsetLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InsetLabel.swift; sourceTree = "<group>"; };
+		B43EFE0426C28923008C85FE /* ToastMessageShowable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastMessageShowable.swift; sourceTree = "<group>"; };
+		B43EFE0626C2A074008C85FE /* APIProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIProtocol.swift; sourceTree = "<group>"; };
 		B4877C6326BCCC1A00647823 /* PokemonNameCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokemonNameCell.swift; sourceTree = "<group>"; };
 		B4877C6426BCCC1A00647823 /* PokemonNameCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PokemonNameCell.xib; sourceTree = "<group>"; };
 		B4877C6726BCCCAA00647823 /* ListExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListExtension.swift; sourceTree = "<group>"; };
@@ -83,6 +89,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B43EFDFD26C27196008C85FE /* Custom */ = {
+			isa = PBXGroup;
+			children = (
+				B4896A4D26BED8E100415AC0 /* LoadingImageView.swift */,
+				B4877C6726BCCCAA00647823 /* ListExtension.swift */,
+				B43EFE0226C28720008C85FE /* InsetLabel.swift */,
+				B43EFE0426C28923008C85FE /* ToastMessageShowable.swift */,
+			);
+			path = Custom;
+			sourceTree = "<group>";
+		};
 		B4877C6D26BCDCA700647823 /* InputView */ = {
 			isa = PBXGroup;
 			children = (
@@ -120,8 +137,7 @@
 		B4955C1D26BBE7C700AA1835 /* PokemonDictionary */ = {
 			isa = PBXGroup;
 			children = (
-				B4896A4D26BED8E100415AC0 /* LoadingImageView.swift */,
-				B4877C6726BCCCAA00647823 /* ListExtension.swift */,
+				B43EFDFD26C27196008C85FE /* Custom */,
 				B4955C3226BBEAF500AA1835 /* API */,
 				B4955C4026BC349000AA1835 /* Search */,
 				B498DA5126BE4E1C00ED4EB2 /* PokemonDetails */,
@@ -142,6 +158,7 @@
 				B4955C3926BC259100AA1835 /* Response */,
 				B4955C3526BBED0000AA1835 /* URLString.swift */,
 				B4955C3326BBEB0D00AA1835 /* Resource.swift */,
+				B43EFE0626C2A074008C85FE /* APIProtocol.swift */,
 				B4955C3726BC0D1100AA1835 /* APIManager.swift */,
 			);
 			path = API;
@@ -279,14 +296,17 @@
 				B4955C1F26BBE7C700AA1835 /* AppDelegate.swift in Sources */,
 				B4A3ACFF26BFC1EB00A5C7E0 /* PokemonAnnotationView.swift in Sources */,
 				B4877C7226BCDFB900647823 /* SearchedPokemon.swift in Sources */,
+				B43EFE0726C2A074008C85FE /* APIProtocol.swift in Sources */,
 				B4A3ACFD26BF6A4A00A5C7E0 /* MapViewModel.swift in Sources */,
 				B4A3ACFA26BF68AA00A5C7E0 /* PokemonMapViewController.swift in Sources */,
 				B4896A4E26BED8E100415AC0 /* LoadingImageView.swift in Sources */,
 				B4955C2126BBE7C700AA1835 /* SceneDelegate.swift in Sources */,
 				B4955C4226BC34A300AA1835 /* SearchViewModel.swift in Sources */,
 				B4877C6F26BCDCBB00647823 /* InputModel.swift in Sources */,
+				B43EFE0526C28923008C85FE /* ToastMessageShowable.swift in Sources */,
 				B4955C3D26BC2D2E00AA1835 /* PokemonLocations.swift in Sources */,
 				B4955C3F26BC2EDA00AA1835 /* PokemonDetail.swift in Sources */,
+				B43EFE0326C28720008C85FE /* InsetLabel.swift in Sources */,
 				B4955C3B26BC25A000AA1835 /* PokemonNames.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

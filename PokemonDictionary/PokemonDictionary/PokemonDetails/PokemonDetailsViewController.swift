@@ -61,7 +61,7 @@ class PokemonDetailsViewController: UIViewController {
     }
     
     private func animateShowDimmedView() {
-        dimmedView.alpha = 0
+        self.dimmedView.alpha = 0
         UIView.animate(withDuration: 0.4) {
             self.dimmedView.alpha = self.maxDimmedAlpha
         }
@@ -79,7 +79,7 @@ class PokemonDetailsViewController: UIViewController {
         self.animate(onstraint: self.containerViewBottomConstraint,
                      contant: self.defaultHeight)
         
-        dimmedView.alpha = maxDimmedAlpha
+        self.dimmedView.alpha = maxDimmedAlpha
         UIView.animate(withDuration: 0.4) {
             self.dimmedView.alpha = 0
         } completion: { _ in

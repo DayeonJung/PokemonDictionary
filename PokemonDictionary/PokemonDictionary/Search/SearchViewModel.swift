@@ -32,9 +32,8 @@ class SearchViewModel {
             case .success(let datas):
                 self.names = datas.pokemons
                 
-            case .failure(let error):
+            case .failure(_):
                 self.names = nil
-                print("Error", error.localizedDescription)
 
             }
         }
@@ -47,9 +46,8 @@ class SearchViewModel {
             case .success(let datas):
                 self.locations = datas.pokemons
                 
-            case .failure(let error):
+            case .failure(_):
                 self.locations = nil
-                print("Error", error.localizedDescription)
             }
         }
     }

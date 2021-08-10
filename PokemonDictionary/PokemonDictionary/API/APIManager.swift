@@ -5,7 +5,7 @@
 //  Created by Dayeon Jung on 2021/08/05.
 //
 
-import Foundation
+import UIKit
 
 extension URLSession {
     func load<T>(_ resource: Resource<T>, completion: @escaping (T?, String?) -> Void) {
@@ -32,20 +32,7 @@ extension URLSession {
 }
 
 
-class API {
-    enum APIError: LocalizedError {
-        case urlNotSupport
-        case noData(String?)
-        case unknown(String?)
-        
-        var errorDescription: String? {
-            switch self {
-            case .urlNotSupport: return "URL not supported"
-            case .noData(let message): return "has no data" + (message ?? "")
-            case .unknown(let message): return "unknown error occured. " + (message ?? "")
-            }
-        }
-    }
+class API: ErrorControllable {
     
     static let shared: API = API()
     
@@ -57,12 +44,17 @@ class API {
                       completionHandler: @escaping (Result<T, APIError>) -> Void) {
         
         guard let _ = resource.urlRequest?.url else {
-            completionHandler(.failure(.urlNotSupport))
+            let errorType: APIError = .urlNotSupport
+            self.showToastMessage(with: errorType)
+            completionHandler(.failure(errorType))
             return
         }
         
         self.session.load(resource) { parsed, error in
-            guard let parsed = parsed else { completionHandler(.failure(.noData(error)))
+            guard let parsed = parsed else {
+                let errorType: APIError = .noData(error)
+                self.showToastMessage(with: errorType)
+                completionHandler(.failure(errorType))
                 return
             }
             
@@ -73,7 +65,9 @@ class API {
     func getData(from url: URL, completionHandler: @escaping (Result<Data?, APIError>) -> ()) {
         session.loadData(from: url) { data, error in
             if let error = error {
-                completionHandler(.failure(.unknown(error.description)))
+                let errorType: APIError = .unknown(error.description)
+                self.showToastMessage(with: errorType)
+                completionHandler(.failure(errorType))
                 return
             }
             

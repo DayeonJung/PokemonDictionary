@@ -32,8 +32,7 @@ class LoadingImageView: UIImageView {
                     completion()
                 }
                 
-            case .failure(let error):
-                print(error.errorDescription ?? "error occured when loading an image")
+            case .failure(_):
                 completion()
             }
            

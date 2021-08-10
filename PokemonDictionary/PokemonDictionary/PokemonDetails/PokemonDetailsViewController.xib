@@ -71,21 +71,21 @@
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TCK-eL-kHY">
-                                    <rect key="frame" x="20" y="497.5" width="335" height="50"/>
-                                    <color key="backgroundColor" systemColor="systemYellowColor"/>
+                                    <rect key="frame" x="40" y="497.5" width="295" height="50"/>
+                                    <color key="backgroundColor" red="0.95294117647058818" green="0.95294117647058818" blue="0.95294117647058818" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="50" id="9JK-X8-OXq"/>
                                     </constraints>
                                     <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
                                     <state key="normal" title="서식지 보기">
-                                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </state>
                                 </button>
                             </subviews>
                             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             <constraints>
-                                <constraint firstAttribute="trailing" secondItem="TCK-eL-kHY" secondAttribute="trailing" constant="20" id="Fba-w5-3ed"/>
-                                <constraint firstItem="TCK-eL-kHY" firstAttribute="leading" secondItem="UmH-6k-ovo" secondAttribute="leading" constant="20" id="Fo7-bM-ZzX"/>
+                                <constraint firstAttribute="trailing" secondItem="TCK-eL-kHY" secondAttribute="trailing" constant="40" id="Fba-w5-3ed"/>
+                                <constraint firstItem="TCK-eL-kHY" firstAttribute="leading" secondItem="UmH-6k-ovo" secondAttribute="leading" constant="40" id="Fo7-bM-ZzX"/>
                             </constraints>
                             <directionalEdgeInsets key="directionalLayoutMargins" top="32" leading="20" bottom="32" trailing="20"/>
                         </stackView>
@@ -116,9 +116,6 @@
     <resources>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-        <systemColor name="systemYellowColor">
-            <color red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
