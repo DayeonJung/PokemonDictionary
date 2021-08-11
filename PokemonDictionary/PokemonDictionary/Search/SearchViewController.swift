@@ -15,14 +15,14 @@ class SearchViewController: UIViewController {
     var viewModel: SearchViewModel! {
         didSet {
             self.viewModel.updateList = {
-                print("update")
                 self.searchList.reloadData()
             }
             
             self.viewModel.moveToDestinationVC = { viewModel in
                 let destVC = PokemonDetailsViewController(nibName: "PokemonDetailsViewController", bundle: nil)
                 destVC.viewModel = viewModel
-                self.navigationController?.pushViewController(destVC, animated: true)
+                destVC.modalPresentationStyle = .overCurrentContext
+                self.present(destVC, animated: false, completion: nil)
             }
         }
     }
@@ -31,12 +31,10 @@ class SearchViewController: UIViewController {
         super.viewDidLoad()
         
         self.navigationController?.navigationBar.isHidden = true
+        
         self.viewModel = SearchViewModel()
-
         self.inputTopView.delegate = self.viewModel
-        
         self.searchList.setCell(cellName: PokemonNameCell.self)
-        
     }
 
 
@@ -54,11 +52,6 @@ extension SearchViewController: UICollectionViewDataSource {
         return cell
     }
     
-    
-}
-
-extension SearchViewController: UICollectionViewDelegateFlowLayout {
-
 }
 
 extension SearchViewController: UICollectionViewDelegate {

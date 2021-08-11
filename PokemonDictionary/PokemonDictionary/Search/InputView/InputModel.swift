@@ -30,12 +30,19 @@ struct Input: InputGettable {
     
     private func checkLanguage() -> Language {
         guard let text = self.text.first else { return .English }
+        
         let pattern = "^[가-힣ㄱ-ㅎㅏ-ㅣ]$"
-        if let regex = try? NSRegularExpression(pattern: pattern, options: .caseInsensitive) {
-            let results = regex.matches(in: String(text), options: [], range: NSRange(location: 0, length: 1))
-            return results.count == 0 ? .English : .Korean
-
+        let textStr = String(text)
+        let firstLetterRange = textStr.startIndex..<textStr.index(after: textStr.startIndex)
+        
+        if let _ = textStr.range(of: pattern,
+                              options: .regularExpression,
+                              range: firstLetterRange,
+                              locale: nil) {
+            return .Korean
         }
+
         return .English
+
     }
 }

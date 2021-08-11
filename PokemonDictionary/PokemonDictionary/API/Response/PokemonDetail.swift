@@ -25,8 +25,6 @@ class Sprites: Codable {
     let frontFemale: String?
     let frontShiny: String?
     let frontShinyFemale: String?
-//    let other: Other?
-//    let versions: Versions?
 
     enum CodingKeys: String, CodingKey {
         case backDefault = "back_default"
@@ -37,6 +35,5 @@ class Sprites: Codable {
         case frontFemale = "front_female"
         case frontShiny = "front_shiny"
         case frontShinyFemale = "front_shiny_female"
-//        case other, versions
     }
 }

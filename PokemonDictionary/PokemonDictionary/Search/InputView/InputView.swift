@@ -16,6 +16,7 @@ class InputView: UIView {
     
     @IBOutlet weak var textField: UITextField!
     var delegate: InputDelegate?
+    var inputString: Input?
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -42,8 +43,18 @@ class InputView: UIView {
     
     @objc func textFieldDidChange(_ textField: UITextField) {
         guard let text = textField.text,
-              !text.isEmpty else { return }
-        let input = Input(text: text)
-        self.delegate?.updateInput(with: input)
+              !text.isEmpty else {
+            self.inputString = nil
+            return
+        }
+        
+        if let _ = self.inputString {
+            self.inputString?.text = text
+        } else {
+            self.inputString = Input(text: text)
+        }
+        
+        self.delegate?.updateInput(with: self.inputString!)
+
     }
 }
